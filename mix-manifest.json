@@ -1,0 +1,9 @@
+{
+    "/dist/main.js": "/dist/main.js",
+    "/dist/js/oauth.js": "/dist/js/oauth.js",
+    "/dist/js/calendar-api.js": "/dist/js/calendar-api.js",
+    "/dist/js/capture-api.js": "/dist/js/capture-api.js",
+    "/dist/js/background.js": "/dist/js/background.js",
+    "/dist/css/app.css": "/dist/css/app.css",
+    "/dist/images/logo.png": "/dist/images/logo.png"
+}
