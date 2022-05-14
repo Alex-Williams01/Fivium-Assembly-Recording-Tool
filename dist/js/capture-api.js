@@ -882,7 +882,6 @@ function _startCapture() {
                 video: true,
                 audio: true
               };
-              console.log(constraints);
               captureStream = navigator.mediaDevices.getDisplayMedia(constraints).then(function (stream) {
                 var video = document.querySelector('video');
                 video.srcObject = stream;

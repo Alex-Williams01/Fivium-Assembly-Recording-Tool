@@ -2,7 +2,6 @@ export async function startCapture() {
   let captureStream = null;
   try {
     const constraints = {video: true, audio: true};
-    console.log(constraints);
     captureStream = navigator.mediaDevices.getDisplayMedia(constraints)
       .then((stream) => {
         const video = document.querySelector('video');
