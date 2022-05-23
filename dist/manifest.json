@@ -22,7 +22,8 @@
     "desktopCapture",
     "activeTab",
     "scripting",
-    "storage"
+    "storage",
+    "downloads"
   ],
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAj2UTbgYOClPjI8C2hNXRTQtRBIaAFtD+dawhIYwOfKB4Psz/RbKaojROalLgYFHoQDSiMyYLGSibt0ZC3gUQtAlr6ntTOo2PuTHjq6GZfy+MiiijCpULOSG/2GUAhmKn89SN3m1x7+1wQf7UbS2/Rqem0zmuJ0rnBvfdubX4pohpyokmAF23eU1xr+BDnuBXYzHinu6WJymAqI7wrytmYInoCk2W8bPM7meOcWrAUWvqswYaVGiTWPzxOMgqZWktUaM/JLr8KwVqXB8fGJyUd8SgXYk/heRJMsycNsqTQz/7B4wMcAdSN1/lx3VN+S9gvtF2hFtzfDXBLfKAGi2JEQIDAQAB"
 }

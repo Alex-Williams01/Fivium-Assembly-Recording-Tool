@@ -864,39 +864,63 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-function startCapture() {
+function startCapture(_x) {
   return _startCapture.apply(this, arguments);
 }
 
 function _startCapture() {
-  _startCapture = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-    var captureStream, constraints;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+  _startCapture = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(name) {
+    var constraints;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
       while (1) {
-        switch (_context.prev = _context.next) {
+        switch (_context2.prev = _context2.next) {
           case 0:
-            captureStream = null;
-
             try {
               constraints = {
                 video: true,
                 audio: true
-              };
-              captureStream = navigator.mediaDevices.getDisplayMedia(constraints).then(function (stream) {
-                var video = document.querySelector('video');
-                video.srcObject = stream;
-                return stream;
-              });
+              }; //stream needs audio
+
+              navigator.mediaDevices.getDisplayMedia(constraints).then( /*#__PURE__*/function () {
+                var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(stream) {
+                  var devices, video;
+                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+                    while (1) {
+                      switch (_context.prev = _context.next) {
+                        case 0:
+                          _context.next = 2;
+                          return navigator.mediaDevices.enumerateDevices();
+
+                        case 2:
+                          devices = _context.sent;
+                          console.log(devices);
+                          video = document.querySelector('video');
+                          video.srcObject = stream;
+                          console.log(stream.getTracks());
+                          startRecording(stream, name);
+
+                        case 8:
+                        case "end":
+                          return _context.stop();
+                      }
+                    }
+                  }, _callee);
+                }));
+
+                return function (_x2) {
+                  return _ref.apply(this, arguments);
+                };
+              }());
             } catch (err) {
               console.error("Error: " + err);
             }
 
-          case 2:
+          case 1:
           case "end":
-            return _context.stop();
+            return _context2.stop();
         }
       }
-    }, _callee);
+    }, _callee2);
   }));
   return _startCapture.apply(this, arguments);
 }
@@ -908,6 +932,30 @@ function stopStreamedVideo(videoElem) {
     track.stop();
   });
   videoElem.srcObject = null;
+}
+
+function startRecording(stream, name) {
+  var recorder = new MediaRecorder(stream);
+  var data = [];
+
+  recorder.ondataavailable = function (event) {
+    return data.push(event.data);
+  };
+
+  recorder.start();
+
+  recorder.onstop = function (e) {
+    var blob = new Blob(data, {
+      type: "video/mp4"
+    });
+    var url = window.URL.createObjectURL(blob);
+    var filename = name.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '').concat('.mp4');
+    chrome.downloads.download({
+      url: url,
+      filename: filename,
+      saveAs: true
+    });
+  };
 }
 })();
 

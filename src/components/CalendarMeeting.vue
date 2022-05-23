@@ -12,7 +12,7 @@
             style="width:100%"
         />
       </div>
-      <b-button variant="info" @click.prevent="getCurrentMeet" class="refresh">Refresh</b-button>
+      <b-button variant="info" @click.prevent="$emit('refresh')" class="refresh">Refresh</b-button>
       <video autoplay playsinline muted style="background: black; height: 25%"></video>
       <b-button variant="danger" id='record-button' @click.prevent="record"><b-icon icon="record-circle" :animation="this.recording ? 'throb' : ''"></b-icon></b-button>
     </div>
@@ -44,7 +44,9 @@ export default {
   },
   async mounted() {
     chrome.storage.local.get('participants', (result) => {
-      this.tickedPeople = result.participants;
+      if (result.participants.length > 0) {
+        this.tickedPeople = result.participants;
+      }
     });
   },
   computed: {
@@ -59,10 +61,14 @@ export default {
     }
   },
   methods: {
-    record() {
+    async record() {
       this.recording = !this.recording;
       if (this.recording) {
-        this.currentStream = startCapture();
+        // this.currentStream = startCapture(this.currentMeet.currentMeetTitle);
+        let [tab] = await chrome.tabs.query({active: true});
+        console.log(tab);
+        chrome.tabs.create({url: "/my-page.html"});
+        // chrome.scripting.executeScript({target: {tabId: tab.id}, files: ['./background.js']}
       } else {
         stopStreamedVideo(document.querySelector('video'));
       }

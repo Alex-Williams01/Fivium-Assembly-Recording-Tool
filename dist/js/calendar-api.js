@@ -39,8 +39,7 @@ var __webpack_exports__ = {};
   \************************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "getCalendar": () => (/* binding */ getCalendar),
-/* harmony export */   "getCalendarEvent": () => (/* binding */ getCalendarEvent)
+/* harmony export */   "getCalendar": () => (/* binding */ getCalendar)
 /* harmony export */ });
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
@@ -52,17 +51,13 @@ var BASE_URL = "https://www.googleapis.com/calendar/v3";
 var API_KEY = "AIzaSyByU6KIKKZFuVKZBKrrRnWe3ayiA43CDiA";
 function getCalendar(init) {
   var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  return fetch(BASE_URL + '/calendars/primary/events?key=' + API_KEY + '&' + new URLSearchParams(params), _objectSpread(_objectSpread({}, init), {}, {
+  var urlParams = new URLSearchParams(params);
+  urlParams.set("singleEvents", "true");
+  return fetch("".concat(BASE_URL, "/calendars/primary/events?key=").concat(API_KEY, "&").concat(urlParams), _objectSpread(_objectSpread({}, init), {}, {
     method: 'GET'
   })).then(function (response) {
     return response.json();
   });
-}
-function getCalendarEvent(init, eventId) {
-  var params = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-  return fetch(BASE_URL + "/calendars/primary/events/" + eventId + "?key=" + API_KEY + '&' + new URLSearchParams(params), _objectSpread(_objectSpread({}, init), {}, {
-    method: 'GET'
-  }));
 }
 /******/ })()
 ;

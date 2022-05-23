@@ -2,8 +2,11 @@
   <div class="container">
     <b-avatar></b-avatar>
     <b-badge variant="light">BETA</b-badge>
-    <calendar-meeting v-if="!isEmpty(currentMeet)" :current-meet="currentMeet" />
-    <b-alert v-else show>No meeting found</b-alert>
+    <calendar-meeting v-if="!isEmpty(currentMeet)" :current-meet="currentMeet" @refresh="getCurrentMeet" />
+    <div v-else style="background: white; padding:10px">
+      <b-alert show>No meeting found</b-alert>
+      <b-button variant="info" @click.prevent="getCurrentMeet" class="refresh">Refresh</b-button>
+    </div>
   </div>
 </template>
 
@@ -31,23 +34,22 @@ export default {
     isEmpty,
     async getCurrentMeet() {
       withOAuth((init) => {
-        const maxTime = new moment(new Date('May 17, 2022 13:24:00'));
-        const minTime = new moment().startOf('day');
+        const maxTime = new moment('2022-05-23 14:30');
+        const minTime =  new moment('2022-05-23').startOf('day');
         const timeMin = minTime.format();
         const timeMax = maxTime.format();
           getCalendar(init, {timeMin, timeMax}).then((calendar) => {
             if (calendar.items.length === 0) {
               return this.currentMeet = {};
             }
-            const lastEvent = calendar.items[calendar.items.length - 1];
-            if (new moment(lastEvent.end.dateTime).isBefore(maxTime)) {
+            const lastEvent = calendar.items.find(meeting => new moment(meeting.end.dateTime).isAfter(maxTime));
+            if (!lastEvent) {
               return this.currentMeet = {};
             }
-            const attendees = calendar.items[calendar.items.length - 1].attendees;
             this.currentMeet = {
               currentMeetTitle: lastEvent.summary,
-              attendees: attendees ?
-                  attendees.filter(person => person.responseStatus === 'accepted' && !person.self) :
+              attendees: lastEvent.attendees ?
+                  lastEvent.attendees.filter(person => person.responseStatus === 'accepted' && !person.self) :
                 Array(50).fill({ displayName: "Alex Williams"}),
             }
           });
