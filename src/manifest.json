@@ -1,0 +1,29 @@
+{
+  "name": "Fivium Assembly Recording Tool",
+  "description": "Alex's Hackday project!",
+  "version": "1.0",
+  "manifest_version": 3,
+  "icons": {
+    "16": "images/logo.png",
+    "48": "images/logo.png",
+    "128": "images/logo.png"
+  },
+  "action": {
+    "default_popup": "app.html"
+  },
+  "oauth2": {
+    "client_id": "710693448192-p6slggvk4s9l8lc6pjj2j6hc19mshohv.apps.googleusercontent.com",
+    "scopes": ["https://www.googleapis.com/auth/userinfo.profile",
+      "https://www.googleapis.com/auth/calendar.readonly"]
+  },
+  "permissions": [
+    "identity",
+    "tabs",
+    "desktopCapture",
+    "activeTab",
+    "scripting",
+    "storage",
+    "downloads"
+  ],
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAj2UTbgYOClPjI8C2hNXRTQtRBIaAFtD+dawhIYwOfKB4Psz/RbKaojROalLgYFHoQDSiMyYLGSibt0ZC3gUQtAlr6ntTOo2PuTHjq6GZfy+MiiijCpULOSG/2GUAhmKn89SN3m1x7+1wQf7UbS2/Rqem0zmuJ0rnBvfdubX4pohpyokmAF23eU1xr+BDnuBXYzHinu6WJymAqI7wrytmYInoCk2W8bPM7meOcWrAUWvqswYaVGiTWPzxOMgqZWktUaM/JLr8KwVqXB8fGJyUd8SgXYk/heRJMsycNsqTQz/7B4wMcAdSN1/lx3VN+S9gvtF2hFtzfDXBLfKAGi2JEQIDAQAB"
+}

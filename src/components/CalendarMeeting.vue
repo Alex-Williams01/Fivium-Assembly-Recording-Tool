@@ -13,8 +13,7 @@
         />
       </div>
       <b-button variant="info" @click.prevent="$emit('refresh')" class="refresh">Refresh</b-button>
-      <video autoplay playsinline muted style="background: black; height: 25%"></video>
-      <b-button variant="danger" id='record-button' @click.prevent="record"><b-icon icon="record-circle" :animation="this.recording ? 'throb' : ''"></b-icon></b-button>
+      <b-button variant="danger" id='record-button' @click.prevent="openRecordPage"><b-icon icon="camera-reels"></b-icon></b-button>
     </div>
   </div>
 </template>
@@ -27,8 +26,6 @@ export default {
   name: 'CalendarMeeting',
   data() {
     return {
-      currentStream: {},
-      recording: false,
       tickedPeople: [],
     };
   },
@@ -61,17 +58,8 @@ export default {
     }
   },
   methods: {
-    async record() {
-      this.recording = !this.recording;
-      if (this.recording) {
-        // this.currentStream = startCapture(this.currentMeet.currentMeetTitle);
-        let [tab] = await chrome.tabs.query({active: true});
-        console.log(tab);
-        chrome.tabs.create({url: "/my-page.html"});
-        // chrome.scripting.executeScript({target: {tabId: tab.id}, files: ['./background.js']}
-      } else {
-        stopStreamedVideo(document.querySelector('video'));
-      }
+    openRecordPage() {
+      chrome.tabs.create({url: '/record-page.html'});
     },
     getAttendeeName(attendee) {
       return attendee.displayName || startCase(attendee.email.substring(0, attendee.email.indexOf("@")).replace(".", " "));
@@ -93,7 +81,7 @@ export default {
 
 .refresh {
   margin-top: 2px;
-  margin-bottom:20px;
+  margin-bottom:2px;
 }
 
 ::-webkit-scrollbar {

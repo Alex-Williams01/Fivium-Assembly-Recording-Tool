@@ -34,8 +34,8 @@ export default {
     isEmpty,
     async getCurrentMeet() {
       withOAuth((init) => {
-        const maxTime = new moment('2022-05-23 14:30');
-        const minTime =  new moment('2022-05-23').startOf('day');
+        const maxTime = new moment();
+        const minTime =  new moment().startOf('day');
         const timeMin = minTime.format();
         const timeMax = maxTime.format();
           getCalendar(init, {timeMin, timeMax}).then((calendar) => {

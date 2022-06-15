@@ -1,9 +1,12 @@
 {
     "/dist/main.js": "/dist/main.js",
+    "/dist/js/record-page.js": "/dist/js/record-page.js",
     "/dist/js/oauth.js": "/dist/js/oauth.js",
     "/dist/js/calendar-api.js": "/dist/js/calendar-api.js",
     "/dist/js/capture-api.js": "/dist/js/capture-api.js",
-    "/dist/js/background.js": "/dist/js/background.js",
     "/dist/css/app.css": "/dist/css/app.css",
-    "/dist/images/logo.png": "/dist/images/logo.png"
+    "/dist/images/logo.png": "/dist/images/logo.png",
+    "/dist/record-page.html": "/dist/record-page.html",
+    "/dist/app.html": "/dist/app.html",
+    "/dist/manifest.json": "/dist/manifest.json"
 }
